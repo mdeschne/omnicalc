@@ -92,6 +92,15 @@ split1 = starting.split
 date1 = split1[0]
 date1 = date1.to_s
 date1 = date1.gsub("-"," ")
+date1 = date1.split
+
+year1 = date1[0]
+month1 = date1[1]
+day1 = date1[2]
+year1 = year1.to_f
+month1 = month1.to_f
+day1 = day1.to_f
+
 
 time1 = split1[1]
 time1 = time1.to_s
@@ -111,6 +120,14 @@ split2 = ending.split
 date2 = split2[0]
 date2 = date2.to_s
 date2 = date2.gsub("-"," ")
+date2 = date2.split
+
+year2 = date2[0]
+month2 = date2[1]
+day2 = date2[2]
+year2 = year2.to_f
+month2 = month2.to_f
+day2 = day2.to_f
 
 time2 = split2[1]
 time2 = time2.to_s
@@ -123,17 +140,41 @@ seconds2 = seconds2.to_f
 minutes2 = minutes2.to_f
 hours2 = hours2.to_f
 
+sdiff = seconds2 - seconds1
+mdiff = minutes2 - minutes1
+hdiff = hours2 - hours1
+ddiff = day2 - day1
+modiff = month2 - month1
+ydiff = year2 - year1
 
-sout = seconds2 - seconds1
-mout = minutes2 - minutes1
-hout = hours2 - hours1
+mdiff = mdiff * 60
+hdiff = hdiff * 60 * 60
+ddiff = ddiff * 24 * 60 * 60
+modiff= modiff * 31 * 24 * 60 * 60
 
-    @seconds = sout
-    @minutes = mout
-    @hours = hout
-    @days = time2.to_s
-    @weeks = split1.to_s
-    @years = @starting.to_s
+# if modiff = 2
+#   modiff = modiff * 28 * 24 * 60 * 60
+# else
+#   modiff = modiff
+# end
+#
+# if modiff = 1 || modiff = 3 || modiff = 5 || modiff = 7 || modiff = 8 || modiff = 10 || modiff = 12
+#   modiff= modiff * 31 * 24 * 60 * 60
+# else
+#   modiff = modiff * 30 * 24 * 60 * 60
+# end
+
+ydiff = ydiff * 365 * 24 * 60 * 60
+
+secondsout = sdiff + mdiff + hdiff + ddiff + modiff + ydiff
+
+
+    @seconds = secondsout
+    @minutes = secondsout / 60
+    @hours = secondsout / (60*60)
+    @days = secondsout / (60*60*24)
+    @weeks = secondsout / (60*60*24*7)
+    @years = secondsout / (60*60*24*365)
 
 
     # ================================================================================
@@ -150,6 +191,8 @@ hout = hours2 - hours1
     # Your code goes below.
     # The numbers the user input are in the array @numbers.
     # ================================================================================
+
+
 
     @sorted_numbers = "Replace this string with your answer."
 
