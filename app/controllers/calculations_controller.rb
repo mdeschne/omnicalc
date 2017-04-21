@@ -192,32 +192,63 @@ secondsout = sdiff + mdiff + hdiff + ddiff + modiff + ydiff
     # The numbers the user input are in the array @numbers.
     # ================================================================================
 
+numbers = @numbers.sort
+
+    @sorted_numbers = numbers.sort
+
+    @count = numbers.count
+
+count = numbers.count
+
+    @minimum = numbers.min
+
+    @maximum = numbers.max
+
+max = numbers.max
+min = numbers.min
+
+    @range = max - min
+
+mid = count / 2
 
 
-    @sorted_numbers = "Replace this string with your answer."
+if mid.odd?
+    @median = numbers[mid]
+else
+  lmid = (count / 2) - 0.5
+  umid = (count / 2) + 0.5
+  lmid = numbers[lmid]
+  umid = numbers[umid]
+  even = (lmid+umid)/2
+    @median = even - 0.5
 
-    @count = "Replace this string with your answer."
+end
+    @sum = numbers.sum
+sum = numbers.sum
 
-    @minimum = "Replace this string with your answer."
+avg = sum/count
 
-    @maximum = "Replace this string with your answer."
+    @mean = avg
 
-    @range = "Replace this string with your answer."
+variance = []
 
-    @median = "Replace this string with your answer."
+numbers.each do |num|
+  var = num - avg
+  var1 = var**2
+  variance.push(var1)
 
-    @sum = "Replace this string with your answer."
+end
 
-    @mean = "Replace this string with your answer."
+@variance = (variance.sum)/count
 
-    @variance = "Replace this string with your answer."
+    @standard_deviation = @variance**0.5
 
-    @standard_deviation = "Replace this string with your answer."
+freq = numbers.inject(Hash.new(0)) {|h,v| h[v] += 1; h }
 
-    @mode = "Replace this string with your answer."
+    @mode = numbers.max_by {|v| freq[v]}
 
     # ================================================================================
-    # Your code goes above.
+    # # Your code goes above.
     # ================================================================================
 
     render("descriptive_statistics.html.erb")
